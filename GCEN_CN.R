@@ -36,8 +36,8 @@ rm_data <- cell_data[complete.cases(cell_data), ]
 
 library(coexnet)
 cor_pearson <- findThreshold(expData = rm_data,method = "correlation")
-cor_pearson
-threshold=0.8
+threshold=cor_pearson
+#threshold=0.8
 
 # Finding PCC value
 simil<- round(cor(rm_data, method="pearson"),2)
@@ -52,18 +52,19 @@ ggcorr(simil, label = TRUE)
 Ad <- matrix(0,ncol = nrow(simil),nrow = nrow(simil))
 
 # Transform to adjacency matrix
+#threshold=0.8
 for(i in seq_len(nrow(simil))){
   Ad[which(simil[,i]>=threshold),i]<-1
   Ad[which(simil[,i]<threshold),i]<-0
 }
 
-for (i in seq_len(nrow(simil))){
-  for (j in seq_len(nrow(simil))){
-    if (simil[i,j]>=threshold){
-      Ad[i,j] <- simil[i,j] 
-    }
-  }
-}
+#for (i in seq_len(nrow(simil))){
+# for (j in seq_len(nrow(simil))){
+#    if (simil[i,j]>=threshold){
+#      Ad[i,j] <- simil[i,j] 
+#    }
+#  }
+#}
 
 # Change the names of adjacency matrix to the names of the genes
 
