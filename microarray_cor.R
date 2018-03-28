@@ -101,7 +101,7 @@ te1=function(x,j){
   return(b)
 }
 
-newval=mapply(te1,length(index$row),length(index$col))
+newval=mapply(te1,1:length(index$row),1:length(index$col))
 newAd$value = newval
 colnames(newAd)=c("name","value")
 
